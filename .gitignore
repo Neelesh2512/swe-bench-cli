@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.task-bundle/
+*.egg-info/
+.pytest_cache/
+.claude/

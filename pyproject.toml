@@ -1,0 +1,27 @@
+[project]
+name = "swe-bench-cli"
+version = "0.1.0"
+description = "CLI to run SWE-bench-style coding evals in isolated, reproducible containers"
+requires-python = ">=3.11"
+dependencies = [
+    "typer>=0.12",
+    "docker>=7.1",
+    "rich>=13",
+]
+
+[project.optional-dependencies]
+# mini-swe-agent solver deps; installed on demand, not needed for stub solver
+agent = ["mini-swe-agent"]
+
+[project.scripts]
+task = "swe_bench_cli.cli:app"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/swe_bench_cli"]

@@ -1,0 +1,25 @@
+{
+  "task_id": "ansible__ansible-e64c6c1",
+  "repo": "https://github.com/ansible/ansible",
+  "base_commit": "a0aad17912da687a3b0b5a573ab6ed0394b569ad",
+  "dockerhub_tag": "ansible.ansible-ansible__ansible-e64c6c1ca50d7d26a8e7747d8eb87642e767cd74-v0f01c69f1e2528b935359cfe578530722bca2c59",
+  "env": {
+    "test_cmd": "PYTHONPATH=/app/lib python -m pytest -q -p no:cacheprovider {test_id}",
+    "workdir": "/app",
+    "base_image": "python:3.11-slim",
+    "build_cmd": "apt-get update && apt-get install -y --no-install-recommends git curl unzip ca-certificates && rm -rf /var/lib/apt/lists/* && curl -fsSL https://opencode.ai/install | bash && git clone --filter=blob:none {repo} {workdir} && cd {workdir} && git checkout {base_commit} && pip install --no-cache-dir jinja2 PyYAML cryptography packaging 'resolvelib>=0.5.3,<1.1.0' mock pytest pytest-mock pytest-xdist"
+  },
+  "test_patch": "test_patch.diff",
+  "golden_patch": "patch.diff",
+  "fail2pass": [
+    "test/units/modules/test_unarchive.py::TestCaseZipArchive::test_valid_time_stamp[invalid-month-1980]",
+    "test/units/modules/test_unarchive.py::TestCaseZipArchive::test_valid_time_stamp[invalid-year-1979]",
+    "test/units/modules/test_unarchive.py::TestCaseZipArchive::test_valid_time_stamp[valid-datetime]",
+    "test/units/modules/test_unarchive.py::TestCaseZipArchive::test_valid_time_stamp[invalid-year-2108]",
+    "test/units/modules/test_unarchive.py::TestCaseZipArchive::test_valid_time_stamp[invalid-datetime]"
+  ],
+  "pass2pass": [
+    "test/units/modules/test_unarchive.py::TestCaseTgzArchive::test_no_tar_binary"
+  ],
+  "timeout_sec": 1800
+}

@@ -1,0 +1,25 @@
+{
+  "task_id": "ansible__ansible-d9f1866",
+  "repo": "https://github.com/ansible/ansible",
+  "base_commit": "59ca05b70994b07a9507f61a0871146a4991b262",
+  "dockerhub_tag": "ansible.ansible-ansible__ansible-d9f1866249756efc264b00ff7497e92c11a9885f-v0f01c69f1e2528b935359cfe578530722bca2c59",
+  "env": {
+    "test_cmd": "PYTHONPATH=/app/lib python -m pytest -q -p no:cacheprovider {test_id}",
+    "workdir": "/app",
+    "base_image": "python:3.11-slim",
+    "build_cmd": "apt-get update && apt-get install -y --no-install-recommends git curl unzip ca-certificates && rm -rf /var/lib/apt/lists/* && curl -fsSL https://opencode.ai/install | bash && git clone --filter=blob:none {repo} {workdir} && cd {workdir} && git checkout {base_commit} && pip install --no-cache-dir jinja2 PyYAML cryptography packaging 'resolvelib>=0.5.3,<1.1.0' mock pytest pytest-mock pytest-xdist"
+  },
+  "test_patch": "test_patch.diff",
+  "golden_patch": "patch.diff",
+  "fail2pass": [
+    "test/units/module_utils/common/validation/test_check_type_dict.py::test_check_type_dict_fail"
+  ],
+  "pass2pass": [
+    "test/units/module_utils/common/validation/test_check_type_dict.py::test_check_type_dict"
+  ],
+  "timeout_sec": 1800,
+  "harness": {
+    "harness": "opencode",
+    "model": "opencode/north-mini-code-free"
+  }
+}
